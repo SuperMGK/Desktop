@@ -1,3 +1,8 @@
+"""
+https://programmers.co.kr/learn/courses/30/lessons/42842
+"""
+
+
 def get_divisor(n):
     n = int(n)
     divisors = []

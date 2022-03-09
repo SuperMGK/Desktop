@@ -1,3 +1,6 @@
+
+
+
 def get_divisor(n):
     n = int(n)
     divisors = []
