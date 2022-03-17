@@ -1,4 +1,5 @@
 import random
+stage = [4, 4, 4, 4, 4]
 
 def random_List(size):
     random.seed(1)
@@ -7,8 +8,6 @@ def random_List(size):
         result.append(random.randint(1, size))
 
     return result
-
-
 
 def solution(N, stages):
     stages.sort()
@@ -20,13 +19,14 @@ def solution(N, stages):
         if st_num < stages[i]:
             dic[st_num] = 0
             st_num += 1
+            continue
 
         if stages[i] == stages[-1]:
             if stages[i] == N + 1:
                 break
 
             else:
-                fail_ratio = round((len(stages) - i) / line, 5)
+                fail_ratio = len(stages) - i / line
                 dic[stages[i]] = fail_ratio
                 break
 
@@ -35,11 +35,18 @@ def solution(N, stages):
             continue
 
         else:
-            fail_ratio = round(cnt / line, 5)
+            fail_ratio = cnt / line
             line -= cnt
             cnt = 1
             dic[stages[i]] = fail_ratio
             st_num += 1
+
+    for i in range(1, N + 1):
+        if i in dic.keys():
+            continue
+
+        else:
+            dic[i] = 0
 
     sorted_dict = sorted(dic.items(), key=lambda item: item[1], reverse=True)
     answer = []
@@ -53,6 +60,7 @@ def solution(N, stages):
 실패, 사이즈가 클수록 정확도가 급격히 떨어지나본데 이유를 모르겠음
 """
 
+
 def solution2(N, stages):
     dic = {}
     answer = []
@@ -64,7 +72,7 @@ def solution2(N, stages):
             dic[i] = 0
 
         else:
-            dic[i] = round(cnt / line, 5)
+            dic[i] = cnt / line
             line -= cnt
 
     sorted_dict = sorted(dic.items(), key=lambda item: item[1], reverse=True)
@@ -75,13 +83,43 @@ def solution2(N, stages):
     return answer
 
 
-print(solution(100, random_List(100)))
-print(solution2(100, random_List(100)))
-print(solution(100, random_List(100)) == solution2(100, random_List(100)))
+def solution3(N, stages):
+    cnt = [0] * (N + 1)
+    for i in stages:
+        cnt[i - 1] += 1
+
+    line = len(stages)
+    dic = {}
+
+    for i in range(len(cnt) - 1):
+        if cnt[i] == 0:
+            dic[i + 1] = 0
+
+        else:
+            fail_ratio = cnt[i] / line
+            line -= cnt[i]
+            dic[i + 1] = fail_ratio
+
+    sorted_dict = sorted(dic.items(), key=lambda item: item[1], reverse=True)
+
+    answer = []
+    for k in sorted_dict:
+        answer.append(k[0])
+
+    return answer
+
+
+print(solution3(5, [2, 1, 2, 6, 2, 4, 3, 3]))
+print(solution3(4, [4,4,4,4,4]))
+
+# b = random_List(50)
+# b.sort()
+# print(b)
+#
+# print(solution(50, random_List(50)))
+# print(solution2(50, random_List(50)))
 
 # for i in range(1, 100):
 #     # print(solution(i, random_List(i)))
 #     # print(solution2(i, random_List(i)))
 #     print(solution(i, random_List(i)) == solution2(i, random_List(i)))
-
-
