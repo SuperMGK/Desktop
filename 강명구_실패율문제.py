@@ -1,5 +1,5 @@
 import random
-stage = [4, 4, 4, 4, 4]
+import time
 
 def random_List(size):
     random.seed(1)
@@ -107,19 +107,28 @@ def solution3(N, stages):
         answer.append(k[0])
 
     return answer
-
-
-print(solution3(5, [2, 1, 2, 6, 2, 4, 3, 3]))
-print(solution3(4, [4,4,4,4,4]))
-
-# b = random_List(50)
-# b.sort()
-# print(b)
+# time1 = time.time()
+# print(solution(5, [2, 1, 2, 6, 2, 4, 3, 3]))
+# print(solution2(5, [2, 1, 2, 6, 2, 4, 3, 3]))
+# print(solution3(5, [2, 1, 2, 6, 2, 4, 3, 3]))
 #
-# print(solution(50, random_List(50)))
-# print(solution2(50, random_List(50)))
+# print(solution(4, [4, 4, 4, 4, 4]))
+# print(solution2(4, [4, 4, 4, 4, 4]))
+# print(solution3(4, [4, 4, 4, 4, 4]))
 
-# for i in range(1, 100):
-#     # print(solution(i, random_List(i)))
-#     # print(solution2(i, random_List(i)))
-#     print(solution(i, random_List(i)) == solution2(i, random_List(i)))
+# for i in range(1, 5000):
+#     solution3(i, random_List(i))
+    # print(solution2(i, random_List(i)))
+    # print(solution2(i, random_List(i)) == solution3(i, random_List(i)))
+# time2 = time.time()
+
+# print(time2 - time1)
+
+print(solution2(3, [1, 1, 1]))
+print(solution3(3, [1, 1, 1]))
+
+print(solution2(1, [2]))
+print(solution3(1, [2]))
+
+print(solution2(5, [2, 2, 2, 3, 3, 3, 4, 4, 4]))
+print(solution3(5, [2, 2, 2, 3, 3, 3, 4, 4, 4]))
